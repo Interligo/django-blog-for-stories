@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %} Список рассказов {% endblock %}
+
+{% block content %}
+
+    {% if all_stories %}
+
+        {% for story in all_stories %}
+            <a href="{% url 'stories:detail' story.id %}">{{story.story_title}}</a>
+        {% endfor %}
+
+    {% else %}
+        Ничего не найдено.
+    {% endif %}
+
+{% endblock %}
+
