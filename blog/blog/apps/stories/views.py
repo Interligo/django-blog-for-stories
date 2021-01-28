@@ -6,6 +6,8 @@ from django.utils.timezone import now
 
 from .models import Story
 from .models import Comment
+from analytics.models import PageHit
+from analytics.decorators import counted
 
 
 def index(request):
@@ -13,6 +15,7 @@ def index(request):
     return render(request, 'stories/stories_list.html', {'all_stories': all_stories})
 
 
+@counted
 def detail(request, story_id):
     try:
         story = Story.objects.get(id=story_id)
@@ -20,8 +23,9 @@ def detail(request, story_id):
         raise Http404('Ничего найти не удалось!')
 
     comments = story.comment_set.order_by('-id')
+    views = PageHit.objects.get(id=story_id)
 
-    return render(request, 'stories/detail.html', {'story': story, 'comments': comments})
+    return render(request, 'stories/story_detail.html', {'story': story, 'comments': comments, 'views': views})
 
 
 # TODO: проверить приходит ли post запрос
