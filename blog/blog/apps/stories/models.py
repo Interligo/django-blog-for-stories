@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 # TODO: изменить отображаемое имя в админке
@@ -6,7 +7,6 @@ from django.db import models
 class Story(models.Model):
     story_title = models.CharField('Название рассказа', max_length=200)
     story_text = models.TextField('Текст рассказа')
-    story_views = models.PositiveIntegerField(default=0)
     story_likes = models.PositiveIntegerField(default=0)
 
     class Meta:
