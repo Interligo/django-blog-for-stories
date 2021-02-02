@@ -1,10 +1,11 @@
 import os
 import sys
 from pathlib import Path
-from dotenv import load_dotenv
+
+from .load_environment import load_environment
 
 
-load_dotenv()
+load_environment()
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,6 +26,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'stories.apps.StoriesConfig',
     'analytics.apps.AnalyticsConfig',
+    'main.apps.MainConfig',
+    'sendemail.apps.SendemailConfig',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +63,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blog.wsgi.application'
 
+# TODO: заменить sqlite3 на postgresql
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -94,3 +98,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 465  # 587
+EMAIL_USE_SSL = True
+RECIPIENT_LIST = os.getenv('RECIPIENT_LIST')
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
