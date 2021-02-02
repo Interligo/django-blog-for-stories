@@ -4,5 +4,16 @@ from .models import Story
 from .models import Comment
 
 
-admin.site.register(Story)
-admin.site.register(Comment)
+@admin.register(Story)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('story_title', 'story_likes')
+    list_filter = ('story_title',)
+    search_fields = ('story_title',)
+
+
+# TODO: изменить отображаемое имя 'story' в админке
+@admin.register(Comment)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('story', 'authors_name', 'comment_text', 'publication_date')
+    list_filter = ('authors_name', 'publication_date')
+    search_fields = ('authors_name',)
