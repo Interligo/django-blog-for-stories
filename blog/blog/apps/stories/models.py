@@ -2,7 +2,6 @@ from django.db import models
 from django.urls import reverse
 
 
-# TODO: изменить отображаемое имя в админке
 # TODO: лайки, дизлайки на комментариях; лайки на истории
 class Story(models.Model):
     story_title = models.CharField('Название рассказа', max_length=200)
@@ -18,7 +17,7 @@ class Story(models.Model):
 
 
 class Comment(models.Model):
-    story = models.ForeignKey(Story, on_delete=models.CASCADE)
+    story = models.ForeignKey(Story, on_delete=models.CASCADE, related_name='comments')
     authors_name = models.CharField('Имя автора', max_length=50)
     comment_text = models.CharField('Текст комментария', max_length=200)
     publication_date = models.DateTimeField('Дата публикации комментария')
