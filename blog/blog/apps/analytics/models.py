@@ -10,4 +10,4 @@ class PageHit(models.Model):
         verbose_name_plural = 'Счётчики'
 
     def __str__(self):
-        return self.count
+        return f'Счётчик {self.url}, {str(self.count)} просмотров.'

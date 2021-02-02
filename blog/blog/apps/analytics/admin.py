@@ -2,10 +2,13 @@ from django.contrib import admin
 
 from .models import PageHit
 
+
 @admin.register(PageHit)
 class PostAdmin(admin.ModelAdmin):
-    readonly_fields = ('url', 'count',)
-    list_display = ('url', 'count',)
+    readonly_fields = ('url', 'count')
+    list_display = ('url', 'count')
+    list_filter = ('count',)
+    search_fields = ('url',)
     list_display_links = ('url',)
 
     def has_add_permission(self, request):
