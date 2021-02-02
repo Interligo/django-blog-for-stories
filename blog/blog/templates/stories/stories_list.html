@@ -7,7 +7,7 @@
     {% if all_stories %}
 
         {% for story in all_stories %}
-            <a href="{% url 'stories:detail' story.id %}">{{story.story_title}}</a>
+            <a href="{% url 'stories:detail' story.id %}">{{story.story_title}}</a><br>
         {% endfor %}
 
     {% else %}
