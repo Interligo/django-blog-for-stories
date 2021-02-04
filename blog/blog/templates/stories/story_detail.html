@@ -6,10 +6,17 @@
 
     <h2>{{story.story_title}}</h2>
     <p>{{story.story_text}}</p>
-    <em>Просмотров: {{views.count}}</em>
 
     {% with comments.count as total_comments %}
-        <h2>Всего комментариев: {{ total_comments }}</h2>
+        <div>
+                <div class="card-header">
+                    <h5 class="card-title">Статистика:</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Просмотров: {{views.count}}</p>
+                    <p class="card-text">Всего комментариев: {{ total_comments }}</p>
+                </div>
+            </div>
     {% endwith %}
 
     <hr>
@@ -18,7 +25,8 @@
                 <p>
                     <strong>{{comment.authors_name}}</strong>
                     <p>{{comment.comment_text}}</p>
-                    <em>{{comment.publication_date}}</em>
+                    <p>{{comment.publication_date}}</p>
+                    <hr>
                 </p>
             {% endfor %}
 
@@ -28,13 +36,10 @@
     <hr>
 
     <form action="{% url 'stories:leave_comment' story.id %}" method="POST">
-
         {% csrf_token %}
-
         <input type="text" required="" placeholder="Ваше имя" name="comment_author_name"><br>
         <textarea required="" placeholder="Текст комментария" name="comment_text" cols="40" rows="5"></textarea><br>
-        <button type="submit">Оставить комментарий</button>
-
+        <button class="btn btn-primary">Оставить комментарий</button>
     </form>
 
     {% include "pagination.html" with page=comments_on_page %}
