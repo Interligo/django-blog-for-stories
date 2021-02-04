@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 
-{% block title %} Список рассказов {% endblock %}
+{% block title %} Рассказы {% endblock %}
 
 {% block content %}
 
     {% if all_stories %}
 
         {% for story in all_stories %}
-            <a href="{% url 'stories:detail' story.id %}">{{story.story_title}}</a><br>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="card-title">{{ story.story_title }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Название конкурса: "{{ story.story_competition }}".</p>
+                    <p class="card-text">Описание конкурса: "{{ story.story_competition_description }}."</p>
+                    <p class="card-text">Призовое место: {{ story.story_award_winning_place }}.</p>
+                    <a href="{% url 'stories:detail' story.id %}" class="btn btn-primary">Перейти к рассказу</a>
+                </div>
+            </div>
         {% endfor %}
 
     {% else %}
@@ -15,4 +25,3 @@
     {% endif %}
 
 {% endblock %}
-
