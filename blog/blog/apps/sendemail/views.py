@@ -1,5 +1,6 @@
 from django.core.mail import send_mail
 from django.core.mail import BadHeaderError
+from django.urls import reverse
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -21,10 +22,10 @@ def contact_view(request):
             message = form.cleaned_data['message']
             try:
                 is_mail_send = send_mail(f'{subject} от {author}', message,
-                          settings.EMAIL_HOST_USER, settings.RECIPIENT_LIST, fail_silently=False)
+                          settings.EMAIL_HOST_USER, ['Interligo@yandex.ru'], fail_silently=False)  # TODO: спрятать mail
                 if is_mail_send:
                     messages.success(request, 'Сообщение отправлено!')
-                    return redirect('main.index')
+                    return HttpResponseRedirect(reverse('sendemail:contact'))
                 else:
                     messages.errer(request, 'Ошибка отправки :(')
             except BadHeaderError:
