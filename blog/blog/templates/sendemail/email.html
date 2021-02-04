@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <title>Пример отправки сообщений</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<body>
-  <h1 class="text-center">Оставьте заявку</h1>
+{% extends "base.html" %}
+
+{% block title %} Связаться с автором {% endblock %}
+
+{% block content %}
+
+  <h1 class="text-center">Связаться с автором</h1>
   <div class="container text-center">
     <div id="form_container">
       <form method="post">
@@ -18,5 +16,5 @@
       </form>
     </div>
   </div>
-</body>
-</html>
+
+{% endblock %}
