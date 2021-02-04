@@ -7,6 +7,3 @@ app_name = 'main'
 urlpatterns = [
     path('', views.index, name='index'),
 ]
-
-# path('<int:story_id>/', views.detail, name='detail'),
-# path('<int:story_id>/leave_comment/', views.leave_comment, name='leave_comment'),
