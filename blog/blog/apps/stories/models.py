@@ -1,12 +1,12 @@
 from django.db import models
-from django.urls import reverse
 
 
-# TODO: лайки, дизлайки на комментариях; лайки на истории
 class Story(models.Model):
     story_title = models.CharField('Название рассказа', max_length=200)
-    story_text = models.TextField('Текст рассказа')
-    story_likes = models.PositiveIntegerField(default=0)
+    story_text = models.TextField('Текст рассказа', blank=True)
+    story_competition = models.CharField('Название конкурса', max_length=200, default='Неизвестно')
+    story_competition_description = models.CharField('Описание конкурса', max_length=500, default='Неизвестно')
+    story_award_winning_place = models.CharField('Призовое место', max_length=10, default='Неизвестно')
 
     class Meta:
         verbose_name = 'Рассказ'
