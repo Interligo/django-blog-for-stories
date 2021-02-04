@@ -6,7 +6,7 @@ from .models import Comment
 
 @admin.register(Story)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('story_title', 'story_likes')
+    list_display = ('story_title', 'story_competition', 'story_award_winning_place')
     list_filter = ('story_title',)
     search_fields = ('story_title',)
 
