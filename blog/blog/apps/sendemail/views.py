@@ -1,10 +1,7 @@
 from django.core.mail import send_mail
-from django.core.mail import BadHeaderError
 from django.urls import reverse
-from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.shortcuts import redirect
 from django.contrib import messages
 
 from django.conf import settings
@@ -20,17 +17,18 @@ def contact_view(request):
             author = form.cleaned_data['author']
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
-            try:
-                is_mail_send = send_mail(f'{subject} от {author}', message,
-                          settings.EMAIL_HOST_USER, ['Interligo@yandex.ru'], fail_silently=False)  # TODO: спрятать mail
-                if is_mail_send:
-                    messages.success(request, 'Сообщение отправлено!')
-                    return HttpResponseRedirect(reverse('sendemail:contact'))
-                else:
-                    messages.errer(request, 'Ошибка отправки :(')
-            except BadHeaderError:
-                return HttpResponse('Ошибка в теме письма.')
-            return redirect('success')
-    else:
-        return HttpResponse('Неверный запрос.')
+            if not form.cleaned_data['email']:
+                email = 'не указана.'
+            else:
+                email = form.cleaned_data['email']
+
+            is_mail_send = send_mail(subject, f'Сообщение:\n{message} \nПочта для обратной связи: {email} '
+                                              f'\nАвтор сообщения: {author}',
+                                     settings.EMAIL_HOST_USER, (settings.RECIPIENT_MAIL,), fail_silently=False)
+            if is_mail_send:
+                messages.success(request, 'Сообщение отправлено!')
+                return HttpResponseRedirect(reverse('sendemail:contact'))
+            else:
+                messages.error(request, 'Ошибка отправки сообщения.')
+
     return render(request, 'sendemail/email.html', {'form': form})
