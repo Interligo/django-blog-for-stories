@@ -5,6 +5,7 @@ from analytics.models import PageHit
 
 register = template.Library()
 
+
 @register.simple_tag(takes_context=True)
 def page_hits(context, page_url=None):
     counter = (PageHit.objects
