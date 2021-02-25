@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block main_page %} Вернуться на главную страницу {% endblock %}
+
+{% block title %} {{ chapter.chapter_title }}: глава {{ chapter.id }} {% endblock %}
+
+{% block content %}
+
+    <p>{{ chapter.chapter_text }}</p>
+
+<!--    <p>{{ chapter.get_all_chapters }}</p>-->
+
+<!--    {% for chap in chapter.get_all_chapters %}-->
+<!--        <p>chap.id</p>-->
+<!--        <a href="{% url 'book:chapter_detail' id %}" class="btn btn-light">Перейти к главе {{ id }}</a>-->
+<!--    {% endfor %}-->
+
+
+<!--    {% include "pagination.html" with page=all_chapters %}-->
+
+<!--    <div class="row" id="navigation">-->
+<!--        <a href="{% url 'book:about_book' %}" class="btn btn-dark">Вернуться к содержанию</a>-->
+<!--        <a href="{% url 'book:chapter_detail' chapter.id %}" class="btn btn-dark">Перейти к следующей главе</a>-->
+<!--    </div>-->
+<!--    <br>-->
+
+{% endblock %}
