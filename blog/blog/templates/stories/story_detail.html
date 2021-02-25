@@ -1,33 +1,40 @@
 {% extends "base.html" %}
 
+
+{% block main_page %} Вернуться на главную страницу {% endblock %}
+
+{% block stories_list %} Вернуться к списку рассказов {% endblock %}
+
 {% block title %} {{story.story_title}} {% endblock %}
 
 {% block content %}
 
-    <h2>{{story.story_title}}</h2>
+    <blockquote class="blockquote">
+      <h2> {{ story.story_title }} </h2>
+      {% with comments.count as total_comments %}
+        <footer class="blockquote-footer"> Просмотров: {{ views.count }}. Всего комментариев: {{ total_comments }}.</footer>
+      {% endwith %}
+    </blockquote>
+
     <p>{{story.story_text}}</p>
 
-    {% with comments.count as total_comments %}
-        <div>
-                <div class="card-header">
-                    <h5 class="card-title">Статистика:</h5>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Просмотров: {{views.count}}</p>
-                    <p class="card-text">Всего комментариев: {{ total_comments }}</p>
-                </div>
-            </div>
-    {% endwith %}
 
     <hr>
+    <h2> Комментарии: </h2>
+    <br>
         {% if comments %}
             {% for comment in comments_on_page %}
-                <p>
-                    <strong>{{comment.authors_name}}</strong>
-                    <p>{{comment.comment_text}}</p>
-                    <p>{{comment.publication_date}}</p>
-                    <hr>
-                </p>
+                    <div class="card w-50 my-2">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ comment.authors_name }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{ comment.comment_text }}</p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            {{ comment.publication_date }}
+                        </div>
+                    </div>
             {% endfor %}
 
         {% else %}
@@ -39,7 +46,7 @@
         {% csrf_token %}
         <input type="text" required="" placeholder="Ваше имя" name="comment_author_name"><br>
         <textarea required="" placeholder="Текст комментария" name="comment_text" cols="40" rows="5"></textarea><br>
-        <button class="btn btn-primary">Оставить комментарий</button>
+        <button class="btn btn-dark">Оставить комментарий</button>
     </form>
 
     {% include "pagination.html" with page=comments_on_page %}
