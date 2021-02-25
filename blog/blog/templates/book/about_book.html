@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+{% block main_page %} Вернуться на главную страницу {% endblock %}
+
+{% block title %} {{ book.book_title }}: о книге {% endblock %}
+
+{% block content %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="card-title">{{ book.book_title }}. Содержание:</h5>
+        </div>
+        <div class="card-body">
+            {% if chapters %}
+                {% for chapter in chapters %}
+                    <p class="card-text">{{ chapter.id }}. {{ chapter.chapter_title }}</p>
+                    <a href="{% url 'book:chapter_detail' chapter.id %}" class="btn btn-light">Перейти к главе</a>
+                    <hr>
+                {% endfor %}
+            {% else %}
+                Главы не найдены.
+            {% endif %}
+        </div>
+    </div>
+
+    <p>{{ book.book_description }}</p>
+
+{% endblock %}
