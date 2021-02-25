@@ -1,5 +1,6 @@
 import os
 import sys
+
 from pathlib import Path
 
 from .load_environment import load_environment
@@ -24,8 +25,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'stories.apps.StoriesConfig',
     'analytics.apps.AnalyticsConfig',
+    'stories.apps.StoriesConfig',
+    'book.apps.BookConfig',
     'main.apps.MainConfig',
     'sendemail.apps.SendemailConfig',
 ]
@@ -104,7 +106,7 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 465  # 587
 EMAIL_USE_SSL = True
-RECIPIENT_LIST = os.getenv('RECIPIENT_LIST')
+RECIPIENT_MAIL = os.getenv('RECIPIENT_MAIL')
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
