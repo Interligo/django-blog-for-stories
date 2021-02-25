@@ -1,9 +1,115 @@
 {% extends "base.html" %}
 
+
 {% block title %} Главная страница {% endblock %}
 
 {% block content %}
 
-    Будущий контент
+<div class="container-fluid padding_left">
+  <style> .padding_left {padding-left: 0px;}</style>
+  <div class="row">
+    <div class="col w-50">
+          <div class="card mb-3">
+            <div class="card-header">
+              <h5 class="card-title">О сайте</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">
+                Описание.
+              </p>
+            </div>
+          </div>
+
+          <div id="accordion">
+            <div class="card">
+              <div class="p-3 card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <button class="p-2 btn btn-link collapsed text-dark" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                      Краткое резюме
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                  <p>В последние годы я работал юристом, моей специализацией было сопровождение банкротств юридических лиц.<br>
+                     Мне всегда было интересно программирование. Иногда, после работы, я с большим удовольствием решал простые обучающие задачи на Питоне. В конечном итоге это привело к тому, что я решил сменить профессиональную область.<br>
+                     Я самостоятельно изучал основы программирования и Питона в частности. В качестве практики программирования я завершил несколько проектов для личного пользования и, на мой взгляд, обладаю достаточными знаниями/навыками для начала работы разработчиком.</p>
+
+                  <a href="https://hh.ru/resume/aee55fa4ff0880bbd10039ed1f6230316d6e34">Ознакомиться с резюме на HeadHunter</a><br>
+                  <a href="https://career.habr.com/interligo">Ознакомиться с резюме на Хабр.Карьера</a>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                  <button class="p-2 btn btn-link collapsed text-dark" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Стек технологий
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                  <style>
+                    .list-counter-circle {
+                      list-style: none;
+                      counter-reset: list;
+                      margin: 0;
+                      padding: 0;
+                      overflow: hidden;
+                    }
+                    .list-counter-circle>li {
+                      position: relative;
+                      display: block;
+                      height: 2rem;
+                      line-height: 2rem;
+                      margin-left: 1.75rem;
+                      margin-bottom: .25rem;
+                      padding-left: 1rem;
+                      padding-right: .5rem;
+                      color: #fff;
+                      background: #2b2a2b;
+                      white-space: nowrap;
+                      border-radius: .25rem
+                    }
+                    .list-counter-circle>li:last-child {
+                      margin-bottom: 0;
+                    }
+                    .list-counter-circle>li::before {
+                      content: counter(list);
+                      counter-increment: list;
+                      position: absolute;
+                      left: -2rem;
+                      top: -.25rem;
+                      bottom: -.25rem;
+                      width: 2.5rem;
+                      line-height: 2rem;
+                      border-radius: 1.25rem;
+                      border: .25rem solid #fff;
+                      text-align: center;
+                      color: #fff;
+                      background: #0d0c0d;
+                    }
+                    </style>
+
+                    <ol class="list-counter-circle">
+                      <li>Python 3</li>
+                      <li>Django Framework</li>
+                      <li>Bash</li>
+                      <li>Git</li>
+                      <li>SQL (PostgreSQL | MySQL)</li>
+                      <li>SQLAlchemy</li>
+                      <li>Pytest</li>
+                    </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="col w-50">
+      <img src="https://64.media.tumblr.com/cd1ce7de77736f3a35126955f568fec3/cfaf8d5e0ca1488f-33/s500x750/686aa6cc592ba89ade7e4d5214aaba4e45efeef4.jpg" class="photo-detail"/>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
