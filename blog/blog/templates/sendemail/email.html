@@ -1,20 +1,38 @@
 {% extends "base.html" %}
 
+
 {% block title %} Связаться с автором {% endblock %}
 
 {% block content %}
-
   <h1 class="text-center">Связаться с автором</h1>
-  <div class="container text-center">
-    <div id="form_container">
-      <form method="post">
+
+  <div class="container">
+    <div class="text-center" id="collapse_container">
+      <input type="button" class="btn btn-dark" data-toggle="collapse" data-target="#toggleSample" value="Дисклеймер об этой странице">
+      <div id="toggleSample" class="collapse in">
+        <p style="background: #F9F9F9; border: 2px solid #E1E1E8; margin-top: 20px; padding: 20px;">
+          Любой посетитель сайта может связаться со мной через эту форму.
+          Для этого не требуется регистрироваться или вводить данные электронной почты.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="contact_container">
+      <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <div class="form-actions form-group ">
-          <button type="submit" class="form-control btn btn-success">Отправить</button>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-dark" id="btn-send">Отправить</button>
         </div>
       </form>
     </div>
   </div>
+
+<!--  <button class="btn btn-primary" type="button" disabled>-->
+<!--    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>-->
+<!--    Loading...-->
+<!--  </button>-->
 
 {% endblock %}
