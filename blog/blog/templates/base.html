@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -11,7 +12,7 @@
 </head>
 
 <body>
-    <container id="navbar">
+    <container id="main-navbar">
         <section class="sticky-top">
             <header class="d-flex flex-column flex-md-row align-items-center p-3 mb-3 bg-white border shadow-sm" id="header-nav">
               <nav class="my-2 my-md-0 me-md-3" id="nav-left">
@@ -23,19 +24,19 @@
                 </a>
 
                 <div class="btn-group">
-                  <button type="button" class="btn btn-light bg-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button type="button" class="btn btn-light bg-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="book">
                     Сага о Каррадии
                   </button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'book:about_book' %}">О книге</a>
+                    <a class="dropdown-item" href="{% url 'book:about_book' %}" id="about-book">О книге</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'book:book_content' %}">Содержание книги</a>
+                    <a class="dropdown-item" href="{% url 'book:book_content' %}" id="book-content">Содержание книги</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'book:chapter_detail' 1 %}">Приступить к чтению</a>
+                    <a class="dropdown-item" href="{% url 'book:chapter_detail' 1 %}" id="chapter1">Приступить к чтению</a>
                   </div>
                 </div>
-
               </nav>
+
               <nav class="ml-auto my-2 my-md-0 me-md-3" id="nav-right">
                 <a class="p-2 text-dark" href="{% url 'sendemail:contact' %}" id="contact">Связаться с автором</a>
                 <a class="p-2 text-dark" href="https://github.com/Interligo" target="_blank" id="github">
@@ -63,15 +64,14 @@
 
     {% block content %}{% endblock %}
 
-
     <footer class="footer bg-white text-dark" style="padding-top: 40px; padding-bottom: 20px">
         <span class="text-muted">© Interligo, 2021</span>
     </footer>
-
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
+
 </html>
