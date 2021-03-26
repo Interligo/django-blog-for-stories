@@ -7,8 +7,13 @@ from .models import BookChapter
 
 def about_book(request, book_id=1):
     book = get_object_or_404(Book, id=book_id)
+    return render(request, 'book/about_book.html', {'book': book})
+
+
+def book_content(request, book_id=1):
+    book = get_object_or_404(Book, id=book_id)
     chapters = book.chapters.order_by('id')
-    return render(request, 'book/about_book.html', {'book': book, 'chapters': chapters})
+    return render(request, 'book/book_content.html', {'book': book, 'chapters': chapters})
 
 
 def chapter_detail(request, chapter_id):
