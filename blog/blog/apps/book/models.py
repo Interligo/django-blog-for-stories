@@ -1,5 +1,4 @@
 from django.db import models
-from django.shortcuts import get_object_or_404
 
 
 class Book(models.Model):
@@ -25,6 +24,7 @@ class BookChapter(models.Model):
     class Meta:
         verbose_name = 'Глава'
         verbose_name_plural = 'Главы'
+        ordering = ('id',)
 
     def __str__(self):
         return f'{self.book}: {self.chapter_title}'
@@ -32,17 +32,41 @@ class BookChapter(models.Model):
     def __repr__(self):
         return self.chapter_title
 
-    # def get_all_chapters(self):
-    #     book = get_object_or_404(Book, id=self.book.id)
-    #     chapters = book.chapters.order_by('id')
-    #     return chapters
+    def get_chapter_ids_list(self) -> list:
+        chapter_ids_list = []
 
-    # def get_chapter_ids(self):
-    #     book = get_object_or_404(Book, id=1)
-    #     chapters = book.chapters.order_by('id')
-    #     result = {}
-    #
-    #     for chapter in chapters:
-    #         result[chapter] = chapter.id
-    #
-    #     return result
+        chapters = self.book.chapters.all()
+        for chapter in chapters:
+            chapter_ids_list.append(chapter.id)
+
+        return chapter_ids_list
+
+    def get_first_chapter(self) -> int:
+        chapter_ids = self.get_chapter_ids_list()
+        return min(chapter_ids)
+
+    def get_last_chapter(self) -> int:
+        chapter_ids = self.get_chapter_ids_list()
+        return max(chapter_ids)
+
+    def get_previous_chapter(self) -> int:
+        current_chapter, previous_chapter = self.id, 0
+        first_chapter = self.get_first_chapter()
+
+        if current_chapter == first_chapter:
+            previous_chapter = first_chapter
+        else:
+            previous_chapter = current_chapter - 1
+
+        return previous_chapter
+
+    def get_next_chapter(self) -> int:
+        current_chapter, next_chapter = self.id, 0
+        last_chapter = self.get_last_chapter()
+
+        if current_chapter >= last_chapter:
+            next_chapter = last_chapter
+        else:
+            next_chapter = current_chapter + 1
+
+        return next_chapter
