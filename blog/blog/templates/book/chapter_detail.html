@@ -7,22 +7,50 @@
 
 {% block content %}
 
-    <p>{{ chapter.chapter_text }}</p>
+    <div class="container-fluid">
+        <div class="row" style="padding-right: 0px;">
+            <div class="d-flex flex-column p-3 px-1 position-fixed bg-white border shadow-sm" style="width: 150px;" id="fixed-sidebar">
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a href="{% url 'book:chapter_detail' chapter.id %}" class="nav-link text-dark" id="chapter-begin">
+                            К началу главы
+                        </a>
+                    </li>
 
-<!--    <p>{{ chapter.get_all_chapters }}</p>-->
+                    <li>
+                        <hr>
+                    </li>
 
-<!--    {% for chap in chapter.get_all_chapters %}-->
-<!--        <p>chap.id</p>-->
-<!--        <a href="{% url 'book:chapter_detail' id %}" class="btn btn-light">Перейти к главе {{ id }}</a>-->
-<!--    {% endfor %}-->
+                    <li>
+                        <a href="{% url 'book:chapter_detail' chapter.get_previous_chapter %}" class="nav-link text-dark" id="previous-chapter">
+                            Предыдущая глава
+                        </a>
+                    </li>
 
+                    <li>
+                        <a href="{% url 'book:chapter_detail' chapter.get_next_chapter %}" class="nav-link text-dark" id="next-chapter">
+                            Следующая глава
+                        </a>
+                    </li>
 
-<!--    {% include "pagination.html" with page=all_chapters %}-->
+                    <li>
+                        <hr>
+                    </li>
 
-<!--    <div class="row" id="navigation">-->
-<!--        <a href="{% url 'book:about_book' %}" class="btn btn-dark">Вернуться к содержанию</a>-->
-<!--        <a href="{% url 'book:chapter_detail' chapter.id %}" class="btn btn-dark">Перейти к следующей главе</a>-->
-<!--    </div>-->
-<!--    <br>-->
+                    <li>
+                        <a href="{% url 'book:book_content' %}" class="nav-link text-dark" id="book-content">
+                            Содержание
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col offset-md-1" style="padding-right: 0px;" id="chapter-text">
+                <p style="border: 1px solid gray; padding: 10px;">
+                    {{ chapter.chapter_text }}
+                </p>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
