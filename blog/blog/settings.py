@@ -15,7 +15,7 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 
 DEBUG = True  # TODO: False после деплоя
 
-ALLOWED_HOSTS = []  # TODO: указать домен после деплоя
+ALLOWED_HOSTS = ['interligo.pythonanywhere.com', '127.0.0.1']
 
 INSTALLED_APPS = [
     'grappelli',
@@ -65,7 +65,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blog.wsgi.application'
 
-# TODO: заменить sqlite3 на postgresql
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -89,13 +88,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'ru-RU'
-
 TIME_ZONE = 'Europe/Moscow'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 STATIC_URL = '/static/'
@@ -104,9 +99,8 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static/')
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = 465  # 587
+EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 RECIPIENT_MAIL = os.getenv('RECIPIENT_MAIL')
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
