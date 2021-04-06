@@ -8,6 +8,7 @@ from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
 
 from .models import Story
+from .forms import LeaveCommentForm
 from analytics.models import PageHit
 from analytics.decorators import counted
 
@@ -17,13 +18,13 @@ def index(request):
     return render(request, 'stories/stories_list.html', {'all_stories': all_stories})
 
 
-# TODO: Сделать обработку 404 ответа сервера
 @counted
 def detail(request, story_id):
     story = get_object_or_404(Story, id=story_id)
     comments = story.comments.order_by('-id')
     paginator = Paginator(comments, 5)
     page = request.GET.get('page')
+    form = LeaveCommentForm()
 
     try:
         comments_on_page = paginator.page(page)
@@ -37,13 +38,13 @@ def detail(request, story_id):
     return render(request, 'stories/story_detail.html', {'story': story,
                                                          'comments': comments,
                                                          'comments_on_page': comments_on_page,
-                                                         'views': views})
+                                                         'views': views,
+                                                         'form': form})
 
 
-# TODO: проверить приходит ли post запрос
 def leave_comment(request, story_id):
     story = get_object_or_404(Story, id=story_id)
-    story.comments.create(authors_name=request.POST['comment_author_name'],
-                          comment_text=request.POST['comment_text'],
+    story.comments.create(authors_name=request.POST['author'],
+                          comment_text=request.POST['text'],
                           publication_date=now())
-    return HttpResponseRedirect(reverse('stories:detail', args=(story.id,)))  # stories:story_detail
+    return HttpResponseRedirect(reverse('stories:detail', args=(story.id,)))
