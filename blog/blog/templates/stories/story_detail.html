@@ -18,8 +18,8 @@
 
     <p>{{story.story_text}}</p>
 
-
     <hr>
+
     <h2> Комментарии: </h2>
     <br>
         {% if comments %}
@@ -40,14 +40,18 @@
         {% else %}
             К этому рассказу пока нет комментариев.
         {% endif %}
+
     <hr>
 
-    <form action="{% url 'stories:leave_comment' story.id %}" method="POST">
-        {% csrf_token %}
-        <input type="text" required="" placeholder="Ваше имя" name="comment_author_name"><br>
-        <textarea required="" placeholder="Текст комментария" name="comment_text" cols="40" rows="5"></textarea><br>
-        <button class="btn btn-dark">Оставить комментарий</button>
-    </form>
+    <div class="container" style="margin: 0px; padding: 0px;" id="leave-comment_container">
+        <form method="POST" action="{% url 'stories:leave_comment' story.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-dark" id="btn-leave-comment">Оставить комментарий</button>
+            </div>
+        </form>
+    </div>
 
     {% include "pagination.html" with page=comments_on_page %}
 
