@@ -8,7 +8,7 @@
 {% block content %}
 
     <div class="card mb-3">
-        <div class="card-header">
+        <div class="card-header" id="about-book">
             <h5 class="card-title">{{ book.book_title }}. О книге:</h5>
         </div>
 
@@ -16,10 +16,15 @@
             {% if book %}
                 <p class="card-text">{{ book.book_description }}</p>
                 <div style="padding-bottom: 10px">
-                    <a href="{% url 'book:book_content' %}" class="btn btn-light">Перейти к содержанию книги</a>
+                    <a href="{% url 'book:book_content' %}" class="btn btn-light" id="btn-book-content">
+                        Перейти к содержанию книги
+                    </a>
                 </div>
+
                 <div>
-                    <a href="{% url 'book:chapter_detail' 1 %}" class="btn btn-light">Приступить к чтению</a>
+                    <a href="{% url 'book:chapter_detail' 1 %}" class="btn btn-light" id="btn-read-book">
+                        Приступить к чтению
+                    </a>
                 </div>
             {% else %}
                 Описание книги не удалось загрузить.
