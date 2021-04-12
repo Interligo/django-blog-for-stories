@@ -11,7 +11,6 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('story_title',)
 
 
-# TODO: изменить отображаемое имя 'story' в админке
 @admin.register(Comment)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('story', 'authors_name', 'comment_text', 'publication_date')
