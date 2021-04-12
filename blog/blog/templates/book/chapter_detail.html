@@ -7,7 +7,6 @@
 
 {% block content %}
 
-<!--TODO: красивый вывод текста главы-->
 
     <div class="container-fluid">
         <div class="row" style="padding-right: 0px;">
@@ -48,9 +47,17 @@
             </div>
 
             <div class="col offset-md-2" style="padding-right: 0px;" id="chapter-text">
-                <p style="border: 1px solid gray; padding: 10px;">
-                    {{ chapter.chapter_text }}
-                </p>
+                <div style="border: 1px solid gray; padding: 10px; text-align: justify;">
+                    {% if chapter.pretty_chapter_print %}
+
+                        {% for item in chapter.pretty_chapter_print %}
+                            <p>{{ item }}</p>
+                        {% endfor %}
+
+                    {% else %}
+                        Текст главы не удалось загрузить.
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
