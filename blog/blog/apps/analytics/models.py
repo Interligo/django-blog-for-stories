@@ -1,8 +1,8 @@
 from django.db import models
 
 
-# TODO: Сделать корректный счетчик просмотров
 class PageHit(models.Model):
+    """Class for a page's visiting count."""
     url = models.CharField(unique=True, max_length=2000)
     count = models.PositiveIntegerField(default=0)
 
