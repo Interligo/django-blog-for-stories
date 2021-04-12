@@ -4,3 +4,5 @@ django-grappelli==2.14.3
 python-dotenv==0.15.0
 pytz==2020.5
 sqlparse==0.4.1
+djangorestframework~=3.12.4
+selenium~=3.141.0
