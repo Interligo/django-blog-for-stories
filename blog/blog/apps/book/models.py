@@ -33,6 +33,7 @@ class BookChapter(models.Model):
         return self.chapter_title
 
     def get_chapter_ids_list(self) -> list:
+        """Return all book chapters list."""
         chapter_ids_list = []
 
         chapters = self.book.chapters.all()
@@ -42,14 +43,17 @@ class BookChapter(models.Model):
         return chapter_ids_list
 
     def get_first_chapter(self) -> int:
+        """Return first chapters number."""
         chapter_ids = self.get_chapter_ids_list()
         return min(chapter_ids)
 
     def get_last_chapter(self) -> int:
+        """Return last chapters number."""
         chapter_ids = self.get_chapter_ids_list()
         return max(chapter_ids)
 
     def get_previous_chapter(self) -> int:
+        """For navigating between chapters. Return previous chapter's number."""
         current_chapter, previous_chapter = self.id, 0
         first_chapter = self.get_first_chapter()
 
@@ -61,6 +65,7 @@ class BookChapter(models.Model):
         return previous_chapter
 
     def get_next_chapter(self) -> int:
+        """For navigating between chapters. Return next chapter's number."""
         current_chapter, next_chapter = self.id, 0
         last_chapter = self.get_last_chapter()
 
@@ -70,3 +75,7 @@ class BookChapter(models.Model):
             next_chapter = current_chapter + 1
 
         return next_chapter
+
+    def pretty_chapter_print(self) -> list:
+        text_to_split = str(self.chapter_text)
+        return text_to_split.split('\n')
