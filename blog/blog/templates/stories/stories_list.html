@@ -10,15 +10,27 @@
     {% if all_stories %}
 
         {% for story in all_stories %}
-            <div class="card mb-3">
+            <div class="card mb-3" id="stories">
                 <div class="card-header">
-                    <h5 class="card-title">{{ story.story_title }}</h5>
+                    <h5 class="card-title" id="story-title">{{ story.story_title }}</h5>
                 </div>
+
                 <div class="card-body">
-                    <p class="card-text">Название конкурса: "{{ story.story_competition }}".</p>
-                    <p class="card-text">Описание конкурса: "{{ story.story_competition_description }}."</p>
-                    <p class="card-text">Призовое место: {{ story.story_award_winning_place }}.</p>
-                    <a href="{% url 'stories:detail' story.id %}" class="btn btn-dark">Перейти к рассказу</a>
+                    <p class="card-text" id="competition">
+                        Название конкурса: "{{ story.story_competition }}".
+                    </p>
+
+                    <p class="card-text" id="competition-description">
+                        Описание конкурса: "{{ story.story_competition_description }}."
+                    </p>
+
+                    <p class="card-text" id="winning_place">
+                        Призовое место: {{ story.story_award_winning_place }}.
+                    </p>
+
+                    <a href="{% url 'stories:detail' story.id %}" class="btn btn-dark" id="btn-story-detail">
+                        Перейти к рассказу
+                    </a>
                 </div>
             </div>
         {% endfor %}
