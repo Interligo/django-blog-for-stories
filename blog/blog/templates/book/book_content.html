@@ -9,16 +9,20 @@
 
     <div class="card mb-3">
         <div class="card-header">
-            <h5 class="card-title">{{ book.book_title }}. Содержание:</h5>
+            <h5 class="card-title" id="book-content">
+                {{ book.book_title }}. Содержание:
+            </h5>
         </div>
 
-        <div class="card-body">
+        <div class="card-body" id="chapters">
             {% if chapters %}
+
                 {% for chapter in chapters %}
                     <p class="card-text">{{ chapter.id }}. {{ chapter.chapter_title }}</p>
                     <a href="{% url 'book:chapter_detail' chapter.id %}" class="btn btn-light">Перейти к главе</a>
                     <hr>
                 {% endfor %}
+
             {% else %}
                 Главы не найдены.
             {% endif %}
