@@ -15,6 +15,10 @@ class Story(models.Model):
     def __str__(self):
         return self.story_title
 
+    def pretty_story_print(self) -> list:
+        text_to_split = str(self.story_text)
+        return text_to_split.split('\n')
+
 
 class Comment(models.Model):
     story = models.ForeignKey(Story, on_delete=models.CASCADE, related_name='comments')
