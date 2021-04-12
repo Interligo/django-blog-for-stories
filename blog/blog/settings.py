@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_ROOT = os.path.dirname(__file__)
 sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 
-DEBUG = True  # TODO: False после деплоя
+DEBUG = True  # TODO: False
 
 ALLOWED_HOSTS = ['interligo.pythonanywhere.com', '127.0.0.1']
 
@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'analytics.apps.AnalyticsConfig',
     'stories.apps.StoriesConfig',
     'book.apps.BookConfig',
@@ -95,6 +96,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static/')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media/')
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
