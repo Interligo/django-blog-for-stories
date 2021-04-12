@@ -9,6 +9,7 @@ from .forms import ContactForm
 
 
 def contact_view(request):
+    """For contact with site-author."""
     if request.method == 'GET':
         form = ContactForm()
     elif request.method == 'POST':
