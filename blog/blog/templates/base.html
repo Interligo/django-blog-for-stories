@@ -33,7 +33,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url 'book:book_content' %}" id="book-content">Содержание книги</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'book:chapter_detail' 1 %}" id="chapter1">Приступить к чтению</a>
+                                <a class="dropdown-item" href="{% url 'book:chapter_detail' 1 %}" id="read-book">Приступить к чтению</a>
                             </div>
                         </div>
                     </nav>
@@ -63,7 +63,9 @@
             </ul>
         {% endif %}
 
-        {% block content %}{% endblock %}
+        <container id="content-container">
+            {% block content %}{% endblock %}
+        </container>
 
         <footer class="footer bg-white text-dark" style="padding-top: 40px; padding-bottom: 20px">
             <span class="text-muted">© Interligo, 2021</span>
