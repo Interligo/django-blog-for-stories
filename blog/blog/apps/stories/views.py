@@ -6,20 +6,27 @@ from django.utils.timezone import now
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
+from rest_framework import generics
+from rest_framework.permissions import IsAdminUser
 
 from .models import Story
 from .forms import LeaveCommentForm
+from .serializers import StoryDetailSerializer
+from .serializers import StoriesListSerializer
+from .serializers import StoryDetailTextSerializer
 from analytics.models import PageHit
 from analytics.decorators import counted
 
 
 def index(request):
+    """All stories list."""
     all_stories = Story.objects.all()
     return render(request, 'stories/stories_list.html', {'all_stories': all_stories})
 
 
 @counted
 def detail(request, story_id):
+    """Current story detail."""
     story = get_object_or_404(Story, id=story_id)
     comments = story.comments.order_by('-id')
     paginator = Paginator(comments, 5)
@@ -43,8 +50,34 @@ def detail(request, story_id):
 
 
 def leave_comment(request, story_id):
+    """Current story comments creator."""
     story = get_object_or_404(Story, id=story_id)
     story.comments.create(authors_name=request.POST['author'],
                           comment_text=request.POST['text'],
                           publication_date=now())
     return HttpResponseRedirect(reverse('stories:detail', args=(story.id,)))
+
+
+class StoryCreateView(generics.CreateAPIView):
+    """Story creation for admins by API."""
+    serializer_class = StoryDetailSerializer
+    permission_classes = (IsAdminUser,)
+
+
+class StoriesListView(generics.ListAPIView):
+    """Stories list for all by API"""
+    serializer_class = StoriesListSerializer
+    queryset = Story.objects.all()
+
+
+class StoryChangeView(generics.RetrieveUpdateDestroyAPIView):
+    """Stories change for admins by API."""
+    serializer_class = StoryDetailSerializer
+    queryset = Story.objects.all()
+    permission_classes = (IsAdminUser,)
+
+
+class StoryDetailView(generics.RetrieveAPIView):
+    """Story detail for all by API."""
+    serializer_class = StoryDetailTextSerializer
+    queryset = Story.objects.all()
