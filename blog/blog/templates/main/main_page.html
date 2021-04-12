@@ -4,6 +4,7 @@
 {% block title %} Главная страница {% endblock %}
 
 {% block content %}
+
     <div class="container-fluid padding_left">
         <style> .padding_left {padding-left: 0px;}</style>
         <div class="row">
@@ -13,24 +14,51 @@
                         <h5 class="card-title">О сайте</h5>
                     </div>
 
-                    <div class="card-body">
-                        <p class="card-text">
-                          Описание.
+                    <div class="card-body" style="text-align: justify;">
+                        <p class="card-text" id="intro">
+                            Путь вайтишника тернист: модная борода у меня не растет, от смузи навыки программирования почему-то не улучшаются,
+                            а костюмы, рубашки и галстуки никак не хотят уступать место в шкафу прикольным майкам и джинсам :)
+                        </p>
+                        <p class="card-text" id="about-site">
+                            И вот стою я такой на "пороге айти" и думаю, чем же мне привлечь внимание взыскательных HR-ов? <br>
+                            И решил я пополнить портфолио и мой гитхаб ещё одним проектом. <br>
+                            Делать ещё один интернет-магазин-пустышку по шаблону? Разве Вам это интересно? <br>
+                            Мне - нет. Я верю, что проект должен быть полезен, хотя бы для меня самого.
+                            Этот сайт призван помочь мне овладеть Django и стать площадкой для публикации моего творчества.
+                        </p>
+                        <p class="card-text" id="about-creation">
+                            Да-да, я не только бывший юрист и вайтишник, но и весьма посредственный писака.
+                            Иногда я принимаю участие в творческих конкурсах и периодически что-то выигрываю. <br>
+                            Как бы то ни было, здесь Вы можете ознакомиться с наиболее удачными из них.
+                            Кроме того, милости прошу на мой гитхаб для ознакомления с кодом.
+                        </p>
+                        <p class="card-text" id="etc">
+                            P.S.
+                            <br>
+                            Ах, да, кроме рассказов здесь размещены несколько глав Саги - это более масштабный и невероятно амбициозный творческий проект.
+                            Когда-нибудь я его завершу. Обязательно завершу.
+                        </p>
+                        <hr>
+                        <p class="card-text" id="about-api">
+                            Кстати, сайт поддерживает API Django REST Framework:
+                            <br>
+                            <a target="_blank" href="{% url 'stories:stories_list' %}">API со списком рассказов</a>
                         </p>
                     </div>
                 </div>
 
                 <div id="accordion">
                     <div class="card">
-                        <div class="p-3 card-header" id="headingOne">
+                        <div class="p-3 card-header" id="heading-one">
                             <h5 class="mb-0">
-                                <button class="p-2 btn btn-link collapsed text-dark" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                <button class="p-2 btn btn-link collapsed text-dark" data-toggle="collapse" data-target="#collapse-one" aria-expanded="false" aria-controls="collapse-one">
                                     Краткое резюме
                                 </button>
                             </h5>
                         </div>
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="card-body">
+
+                        <div id="collapse-one" class="collapse" aria-labelledby="heading-one" data-parent="#accordion">
+                            <div class="card-body" style="text-align: justify;">
                                 <p>
                                   В последние годы я работал юристом, моей специализацией было сопровождение банкротств юридических лиц.<br>
                                   Мне всегда было интересно программирование. Иногда, после работы, я с большим удовольствием решал простые обучающие задачи на Питоне. В конечном итоге это привело к тому, что я решил сменить профессиональную область.<br>
@@ -49,15 +77,15 @@
                     </div>
 
                     <div class="card">
-                        <div class="card-header" id="headingTwo">
+                        <div class="card-header" id="heading-two">
                             <h5 class="mb-0">
-                                <button class="p-2 btn btn-link collapsed text-dark" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button class="p-2 btn btn-link collapsed text-dark" data-toggle="collapse" data-target="#collapse-two" aria-expanded="false" aria-controls="collapse-two">
                                     Стек технологий
                                 </button>
                             </h5>
                         </div>
 
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div id="collapse-two" class="collapse" aria-labelledby="heading-two" data-parent="#accordion">
                             <div class="card-body">
                                 <style>
                                     .list-counter-circle {
@@ -101,14 +129,14 @@
                                     }
                                 </style>
 
-                                <ol class="list-counter-circle">
+                                <ol class="list-counter-circle" id="technologies-list">
                                     <li>Python 3</li>
-                                    <li>Django Framework</li>
+                                    <li>Django Framework (DRF)</li>
                                     <li>Bash</li>
                                     <li>Git</li>
-                                    <li>SQL (PostgreSQL|MySQL)</li>
+                                    <li>SQL (PostgreSQL | MySQL)</li>
                                     <li>ORM (SQLAlchemy)</li>
-                                    <li>Tests (pytest|unittest)</li>
+                                    <li>Tests (pytest | unittest)</li>
                                 </ol>
                             </div>
                         </div>
@@ -116,8 +144,8 @@
                 </div>
             </div>
 
-            <div class="col w-50">
-                <img src="https://64.media.tumblr.com/cd1ce7de77736f3a35126955f568fec3/cfaf8d5e0ca1488f-33/s500x750/686aa6cc592ba89ade7e4d5214aaba4e45efeef4.jpg" class="photo-detail"/>
+            <div class="col w-50" id="my-photo">
+                <img src="media/photo.jpg" width="715" height="1100" class="photo-detail"/>
             </div>
         </div>
     </div>
