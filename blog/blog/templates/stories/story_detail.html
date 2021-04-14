@@ -12,7 +12,7 @@
     <blockquote class="blockquote">
         <h2> {{ story.story_title }} </h2>
         {% with comments.count as total_comments %}
-        <footer class="blockquote-footer"> Просмотров: {{ views.count }}. Всего комментариев: {{ total_comments }}.</footer>
+        <footer class="blockquote-footer"> Всего комментариев: {{ total_comments }}.</footer>
         {% endwith %}
     </blockquote>
 
