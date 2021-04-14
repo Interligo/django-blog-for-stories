@@ -12,9 +12,13 @@
             <h5 class="card-title">{{ book.book_title }}. О книге:</h5>
         </div>
 
-        <div class="card-body">
+        <div class="card-body" style="text-align: justify;">
             {% if book %}
+
                 <p class="card-text">{{ book.book_description }}</p>
+
+                <hr>
+
                 <div style="padding-bottom: 10px">
                     <a href="{% url 'book:book_content' %}" class="btn btn-light" id="btn-book-content">
                         Перейти к содержанию книги
