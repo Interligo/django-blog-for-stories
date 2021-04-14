@@ -15,6 +15,10 @@ class Book(models.Model):
     def __repr__(self):
         return self.book_title
 
+    def pretty_description_print(self) -> list:
+        text_to_split = str(self.book_description)
+        return text_to_split.split('\n')
+
 
 class BookChapter(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='chapters')
