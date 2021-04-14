@@ -17,15 +17,19 @@
 
                 <div class="card-body">
                     <p class="card-text" id="competition">
-                        Название конкурса: "{{ story.story_competition }}".
+                        <strong>Название конкурса:</strong>
+                        <br>
+                        {{ story.story_competition }}.
                     </p>
 
                     <p class="card-text" id="competition-description">
-                        Описание конкурса: "{{ story.story_competition_description }}."
+                        <strong>Описание конкурса:</strong>
+                        <br>
+                        {{ story.story_competition_description }}.
                     </p>
 
                     <p class="card-text" id="winning_place">
-                        Призовое место: {{ story.story_award_winning_place }}.
+                        Призовое место: {{ story.story_award_winning_place }}
                     </p>
 
                     <a href="{% url 'stories:detail' story.id %}" class="btn btn-dark" id="btn-story-detail">
