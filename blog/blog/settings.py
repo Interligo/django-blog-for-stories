@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_ROOT = os.path.dirname(__file__)
 sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 
-DEBUG = True  # TODO: False
+DEBUG = False
 
 ALLOWED_HOSTS = ['interligo.pythonanywhere.com', '127.0.0.1']
 
