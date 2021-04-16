@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import Story
-from .models import Comment
+from stories.models import Story
+from stories.models import Comment
 
 
 @admin.register(Story)
