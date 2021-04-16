@@ -22,12 +22,9 @@ I am self-educating to became a real programmer, so some of my decisions may see
 You can get stories' list by API and after that get the full information about each story. There are a lot of functionalities like adding, changing and deleting stories by API, but they are all only for admins (lol, only for me).
 For example:
 
-`http://interligo.pythonanywhere.com/stories/api/v1/stories_list/`
-`http://interligo.pythonanywhere.com/stories/api/v1/story_detail/{story_id}/`
-`http://interligo.pythonanywhere.com/stories/api/v1/add_story/`
-`http://interligo.pythonanywhere.com/stories/api/v1/change_story/{story_id}/`
-
-I think, that API URLs speak for themselves.
+`https://interligo.pythonanywhere.com/api/v1/stories/` - to get information about all stories
+`https://interligo.pythonanywhere.com/api/v1/stories/{story_id}/` - to changing story data by ID
+`https://interligo.pythonanywhere.com/api/v1/stories/add/` - to add new story
 
 ### The nearest plans for improving the site:
 1. Adaptive layout of the site. Oh, no... Here we go again (hate to move forms).
