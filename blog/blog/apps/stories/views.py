@@ -6,14 +6,9 @@ from django.utils.timezone import now
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
-from rest_framework import generics
-from rest_framework.permissions import IsAdminUser
 
-from .models import Story
-from .forms import LeaveCommentForm
-from .serializers import StoryDetailSerializer
-from .serializers import StoriesListSerializer
-from .serializers import StoryDetailTextSerializer
+from stories.models import Story
+from stories.forms import LeaveCommentForm
 from analytics.models import PageHit
 from analytics.decorators import counted
 
@@ -56,28 +51,3 @@ def leave_comment(request, story_id):
                           comment_text=request.POST['text'],
                           publication_date=now())
     return HttpResponseRedirect(reverse('stories:detail', args=(story.id,)))
-
-
-class StoryCreateView(generics.CreateAPIView):
-    """Story creation for admins by API."""
-    serializer_class = StoryDetailSerializer
-    permission_classes = (IsAdminUser,)
-
-
-class StoriesListView(generics.ListAPIView):
-    """Stories list for all by API"""
-    serializer_class = StoriesListSerializer
-    queryset = Story.objects.all()
-
-
-class StoryChangeView(generics.RetrieveUpdateDestroyAPIView):
-    """Stories change for admins by API."""
-    serializer_class = StoryDetailSerializer
-    queryset = Story.objects.all()
-    permission_classes = (IsAdminUser,)
-
-
-class StoryDetailView(generics.RetrieveAPIView):
-    """Story detail for all by API."""
-    serializer_class = StoryDetailTextSerializer
-    queryset = Story.objects.all()
