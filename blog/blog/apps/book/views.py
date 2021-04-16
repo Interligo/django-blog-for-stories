@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 
-from .models import Book
-from .models import BookChapter
+from book.models import Book
+from book.models import BookChapter
 
 
 def about_book(request, book_id=1):
