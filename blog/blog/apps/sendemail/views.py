@@ -1,3 +1,5 @@
+from typing import Optional
+
 from django.core.mail import send_mail
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -5,31 +7,43 @@ from django.shortcuts import render
 from django.contrib import messages
 
 from django.conf import settings
-from .forms import ContactForm
+from sendemail.forms import ContactForm
+
+
+SUCCESS_MESSAGE = 'Сообщение отправлено!'
+ERROR_MESSAGE = 'Ошибка отправки сообщения.'
+
+
+def _send_email(author: str, subject: str, message: str, email: Optional[str] = None) -> bool:
+    """For sending email and returning boolean value to print message on site."""
+    email_to_get_answer = email if email else 'не указана'
+    return send_mail(
+        subject,
+        f'Сообщение:\n{message} \nПочта для обратной связи: {email_to_get_answer} \nАвтор сообщения: {author}',
+        settings.EMAIL_HOST_USER,
+        (settings.RECIPIENT_MAIL,),
+        fail_silently=False
+    )
 
 
 def contact_view(request):
-    """For contact with site-author."""
+    """For contact with site author."""
     if request.method == 'GET':
         form = ContactForm()
-    elif request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            author = form.cleaned_data['author']
-            subject = form.cleaned_data['subject']
-            message = form.cleaned_data['message']
-            if not form.cleaned_data['email']:
-                email = 'не указана.'
-            else:
-                email = form.cleaned_data['email']
+        return render(request, 'sendemail/email.html', {'form': form})
 
-            is_mail_send = send_mail(subject, f'Сообщение:\n{message} \nПочта для обратной связи: {email} '
-                                              f'\nАвтор сообщения: {author}',
-                                     settings.EMAIL_HOST_USER, (settings.RECIPIENT_MAIL,), fail_silently=False)
-            if is_mail_send:
-                messages.success(request, 'Сообщение отправлено!')
-                return HttpResponseRedirect(reverse('sendemail:contact'))
-            else:
-                messages.error(request, 'Ошибка отправки сообщения.')
+    form = ContactForm(request.POST)
+    if form.is_valid():
+        is_mail_send = _send_email(
+            author=form.cleaned_data['author'],
+            subject=form.cleaned_data['subject'],
+            message=form.cleaned_data['message'],
+            email=form.cleaned_data['email']
+        )
 
-    return render(request, 'sendemail/email.html', {'form': form})
+        if not is_mail_send:
+            messages.error(request, ERROR_MESSAGE)
+            return render(request, 'sendemail/email.html', {'form': form})
+
+    messages.success(request, SUCCESS_MESSAGE)
+    return HttpResponseRedirect(reverse('sendemail:contact'))
