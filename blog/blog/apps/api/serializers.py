@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Story
+from stories.models import Story
 
 
 class StoryDetailSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class StoriesListSerializer(serializers.ModelSerializer):
     """Class for stories list include only id (for detailing), title and winning place (for Interligo's priding)."""
     class Meta:
         model = Story
-        fields = ('id', 'story_title', 'story_award_winning_place')
+        fields = '__all__'
 
 
 class StoryDetailTextSerializer(serializers.ModelSerializer):
