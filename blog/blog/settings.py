@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'book.apps.BookConfig',
     'main.apps.MainConfig',
     'sendemail.apps.SendemailConfig',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
